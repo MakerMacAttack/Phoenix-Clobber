@@ -13,7 +13,8 @@ Clobber is a react app which emulates the popular boardgame Clobber. It maintain
 Upload images of your wireframes to an image hosting site or add them to an assets folder in your repo and link them here with a description of each specific wireframe.
 
 ## Component Hierarchy
-Show your component hierarchy here! Use [this](https://cms-assets.tutsplus.com/uploads/users/1795/posts/30352/image/GettingStartedWithReduxTutorial-React-Component-Structure.png) as an example.
+
+[Component Hierarchy](https://i.imgur.com/e6kJLAF.png)
 
 ## API and Data Sample
 
