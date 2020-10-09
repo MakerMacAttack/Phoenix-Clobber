@@ -14,7 +14,7 @@ Upload images of your wireframes to an image hosting site or add them to an asse
 
 ## Component Hierarchy
 
-[https://i.imgur.com/e6kJLAF.pngComponent](Hierarchy)
+![ComponentHierarchy](https://i.imgur.com/e6kJLAF.png)
 
 ## API and Data Sample
 
