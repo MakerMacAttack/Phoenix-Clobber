@@ -35,7 +35,7 @@ function Game(prop) {
 
   function updateBoard() {
     let updatedBoard = createBoard()
-    captured.map(position => updatedBoard[position] = updatedBoard[position] * -1)
+    captured.map(position => updatedBoard[position] = updatedBoard[position] * -1) // I suppose that somewhere I should filter out captured by empty cuz if a square is empty I don't care if it was ever captured.
     empty.map(space => updatedBoard[space] = 0)
     setBoard(updatedBoard)
   }
