@@ -59,7 +59,7 @@ I will be using a personal Airtable which will log the username, time of creatio
         }
     ],
     "offset": "rec36yesPxv9VQ1RB"
-}```
+}
 
 ### MVP/PostMVP
 
