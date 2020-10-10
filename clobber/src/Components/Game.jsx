@@ -36,16 +36,16 @@ function Game(prop) {
   function updateBoard() {
     let updatedBoard = createBoard()
     captured.map(position => updatedBoard[position] = updatedBoard[position] * -1) // I suppose that somewhere I should filter out captured by empty cuz if a square is empty I don't care if it was ever captured.
-    empty.map(space => updatedBoard[space] = 0)
+    empty.map(space => updatedBoard[space] = 0) // use forEach
     setBoard(updatedBoard)
   }
 
   function populatePlayerMoves(a, b, set) {
     updateBoard()
-    let moves = []
+    const moves = []
     for (const piece in board) {
       if (board[piece] === a) {
-        let possibleMoves = []
+        const possibleMoves = []
         const [r, c] = piece // Is there a way to get back an array of the four adjacent r cs, and pass them to a single function?
         const i = parseInt(r)
         const j = parseInt(c)
@@ -68,9 +68,16 @@ function Game(prop) {
     }
     set(moves)
   }
-function check(a, b, c)
-  if (board[a + b] === c) {
-    return board[a + b]
+
+  function easyAI() {
+    const [piece, moves] = player2Moves[Math.floor(Math.random() * player2Moves.length)]
+    const move = moves[Math.floor(Math.random() * moves.length)]
+    return [piece, move]
+  }
+
+  function makeMove(moveArr) {
+    setEmpty([...empty, moveArr[0]])
+    setNewCaptured(moveArr[1])
   }
 
   useEffect(() => {
