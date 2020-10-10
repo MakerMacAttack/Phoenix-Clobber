@@ -1,9 +1,14 @@
 
 export function createBoard() {
-  let newBoard = {}
-  for (let i = 0; i < 6; i++) // fix this if you ever want to adjust size
-    for (let j = 0; j < 5; j++)
-      newBoard[i.toString() + j.toString()] = (j % 2 === i % 2 ? 1 : -1)
+  let newBoard = []
+  for (let i = 0; i < 6; i++) { // fix this if you ever want to adjust size
+    const row = []
+    for (let j = 0; j < 5; j++){
+      const square = (j % 2 === i % 2 ? 1 : -1)
+      row.push(square)
+    }
+    newBoard.push(row)
+  } 
   return newBoard
 }
 
@@ -17,41 +22,56 @@ export function updateBoard(prev) {
 export function populatePlayerMoves(attacker, defender, set, prevState) {
   const board = updateBoard(prevState)
   const moves = []
-  board.forEach((row, i) => {
-    row.forEach((square, j) => {
-      if (square === attacker) {
+  for (let i = 0; i < 6; i++){
+    for (let j = 0; j < 5; j++) {
+      if (board[i][j] === attacker) {
         const possibleMoves = []
-        if (board[i - 1][j] === defender) {
-          possibleMoves.push([i - 1, j])
+        if (i > 0) {
+          if (board[i - 1][j] === defender) {
+            possibleMoves.push([i - 1, j])
+            // console.log(possibleMoves);
+          }
         }
-        if (board[i + 1][j] === defender) {
-          possibleMoves.push([i + 1, j])
+        if (i < 5) {
+          if (board[i + 1][j] === defender) {
+            possibleMoves.push([i + 1, j])
+            // console.log("check down");
+          }
         }
-        if (row[j - 1] === defender) {
-          possibleMoves.push([i, j - 1])
+        if (j > 0) {
+          if (board[i][j - 1] === defender) {
+            possibleMoves.push([i, j - 1])
+            // console.log("check left");
+          }
         }
-        if (row[j + 1] === defender) {
-          possibleMoves.push([i, j + 1])
+        if (j < 4) {
+          if (board[i][j + 1] === defender) {
+            possibleMoves.push([i, j + 1])
+            // console.log("check right");
+          }
         }
         if (possibleMoves.length > 0) {
+          // console.log(i, j, possibleMoves)
           moves.push([[i, j], possibleMoves])
+          // console.log(moves);
         }
       }
-    });
-  });
+    };
+  };
+  // if (attacker === 1) {
+  //   // console.log(moves);
+  //   set({
+  //     ...prevState,
+  //     player1Moves: moves
+  //   })
+  //   console.log(prevState.player1Moves);
+  // } else {
+  //   set({
+  //     ...prevState,
+  //     player2Moves: moves
+  //   })
   // }
-  if (attacker === 1) {
-    set({
-      ...prevState,
-      player1Moves: moves
-    })
-  } else {
-    set({
-      ...prevState,
-      player2Moves: moves
-    })
-  }
-  return(board)
+  return(moves)
 }
 
 export function makeMove(moveArr, set, prev) {
@@ -65,5 +85,6 @@ export function makeMove(moveArr, set, prev) {
 export default {
   createBoard,
   updateBoard,
-  populatePlayerMoves
+  populatePlayerMoves,
+  makeMove
 }

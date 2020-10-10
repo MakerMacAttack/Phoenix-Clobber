@@ -65,3 +65,7 @@
 .valid {
   border: 1px solid green;
 }
+
+#selected {
+  border: 1px double red;
+}
