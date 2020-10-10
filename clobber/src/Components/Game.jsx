@@ -28,9 +28,18 @@ function Game(prop) {
   }
 
   useEffect(() => {
-    setBoard(createBoard)
+    setBoard(boardMethods.createBoard)
   }, [])
 
+  useEffect(() => {
+    setValid(player1Moves.map(moves => moves[0]))
+    if (player1Moves.length === 0) {
+      setWon()
+    }
+  }
+    , [player1Moves])
+
+  // for when I need it
   ai.easyAI(validMoves)
 
   return <h1>Game here</h1>
