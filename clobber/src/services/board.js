@@ -1,21 +1,21 @@
 
 export function createBoard() {
   let newBoard = {}
-  for (let i = 0; i < rows; i++)
-    for (let j = 0; j < columns; j++)
+  for (let i = 0; i < 6; i++) // fix this if you ever want to adjust size
+    for (let j = 0; j < 5; j++)
       newBoard[i.toString() + j.toString()] = (j % 2 === i % 2 ? 1 : -1)
   return newBoard
 }
 
-export function updateBoard(setBoard) {
+export function updateBoard(prev) {
   let updatedBoard = createBoard()
-  captured.forEach(([i, j]) => updatedBoard[i][j] = updatedBoard[i][j] * -1) // I suppose that somewhere I should filter out captured by empty cuz if a square is empty I don't care if it was ever captured.
-  empty.forEach(([i, j]) => updatedBoard[i][j] = 0) // Come back and make these ! and null if I change the math system.
-  setBoard(updatedBoard) // find a better way to do this that doesn't need me to pass set.
+  prev.captured.forEach(([i, j]) => updatedBoard[i][j] = updatedBoard[i][j] * -1) // I suppose that somewhere I should filter out captured by empty cuz if a square is empty I don't care if it was ever captured.
+  prev.empty.forEach(([i, j]) => updatedBoard[i][j] = 0) // Come back and make these ! and null if I change the math system.
+  return updatedBoard // find a better way to do this that doesn't need me to pass set.
 }
 
-export function populatePlayerMoves(attacker, defender, set, board, setBoard) {
-  updateBoard(setBoard)
+export function populatePlayerMoves(attacker, defender, set, prevState) {
+  const board = updateBoard(prevState)
   const moves = []
   board.forEach((row, i) => {
     row.forEach((square, j) => {
@@ -40,18 +40,26 @@ export function populatePlayerMoves(attacker, defender, set, board, setBoard) {
     });
   });
   // }
-  set(moves)
+  if (attacker === 1) {
+    set({
+      ...prevState,
+      player1Moves: moves
+    })
+  } else {
+    set({
+      ...prevState,
+      player2Moves: moves
+    })
+  }
+  return(board)
 }
 
-export function easyAI() {
-  const [piece, moves] = player2Moves[Math.floor(Math.random() * player2Moves.length)]
-  const move = moves[Math.floor(Math.random() * moves.length)]
-  return [piece, move]
-}
-
-export function makeMove(moveArr) {
-  setEmpty([...empty, moveArr[0]])
-  setNewCaptured(moveArr[1])
+export function makeMove(moveArr, set, prev) {
+  set({
+    ...prev,
+    empty: [...prev.empty, moveArr[0]],
+    newCaptured: moveArr[1]
+  })
 }
 
 export default {
