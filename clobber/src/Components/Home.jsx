@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route } from 'react-router-dom';
 import Nav from "./Nav";
 import Instructions from "./Instructions";
@@ -7,17 +7,20 @@ import Game from "./Game";
 import Leaderboard from "./Leaderboard";
 
 function Home() {
+  const [ack, setAck] = useState(false)
+  const [difficulty, setDifficulty] = useState(null)
+
   return (
     <>
       <header>
-      <Nav />
+        <Nav set={setAck}/>
       </header>
-      <Instructions />
+      <Instructions ack={ack} set={setAck}/>
       <Route path="/difficulty">
-        <Difficulty />
+        <Difficulty set={setDifficulty}/>
       </Route>
       <Route path="/play">
-        <Game />
+        <Game difficulty={difficulty}/>
       </Route>
       <Route path="/hi-score">
         <Leaderboard />

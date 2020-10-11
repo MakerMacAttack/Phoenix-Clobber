@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Square from "./Square";
 import Button from "./Button";
+import Victory from "./Victory"
+import Loss from "./Loss"
 import boardMethods from "../services/board";
 import ai from "../services/ai";
 
-function Game(prop) {
+function Game(props) {
   const [gameState, setGameState] = useState({
     player1Turn: true,
     won: false,
@@ -18,6 +20,7 @@ function Game(prop) {
     threatened: [],
     newCaptured: "",
     begun: false,
+    difficulty: props.difficulty
   });
   // const [player1Turn, setPlayer1Turn] = useState(true)
   // const [won, setWon] = useState(false) // Still need to handle victory
@@ -65,10 +68,11 @@ function Game(prop) {
 
   useEffect(() => {
     if (gameState.player1Moves.length === 0) {
-      setGameState({
-        ...gameState,
-        won: true,
-      });
+      // Activate loss
+      // setGameState({
+      //   ...gameState,
+      //   won: true,
+      // });
     }
     setGameState({
       ...gameState,
@@ -80,8 +84,8 @@ function Game(prop) {
     if (gameState.player1Turn) {
       // setBoard
       const moves = boardMethods.populatePlayerMoves(1, -1, setGameState, gameState)
-      console.log("in the useEffect Moves: ", moves); // WHAT THE LITERAL FUCK
-      setGameState(prevGameState => (
+      // console.log("in the useEffect Moves: ", moves);
+      setGameState(prevGameState => ( // WHAT THE LITERAL FUCK
         {...prevGameState, player1Moves: moves}
       ));
     } else {
