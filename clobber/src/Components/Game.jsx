@@ -81,10 +81,9 @@ function Game(prop) {
       // setBoard
       const moves = boardMethods.populatePlayerMoves(1, -1, setGameState, gameState)
       console.log("in the useEffect Moves: ", moves); // WHAT THE LITERAL FUCK
-      setGameState({
-        ...gameState,
-        player1Moves: [...moves],
-      });
+      setGameState(prevGameState => (
+        {...prevGameState, player1Moves: moves}
+      ));
     } else {
       // setBoard
       const moves = boardMethods.populatePlayerMoves(-1, 1, setGameState, gameState)
