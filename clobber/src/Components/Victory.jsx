@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+import axios from "axios";
 import Reset from "./Reset";
 
 export default function Victory(props) {
   const [name, setName] = useState("");
-  const [submitted, getSubmitted] = useState(false)
+  const [submitted, getSubmitted] = useState(false);
 
   async function submitLeader(victor) {
     const airtableURL = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE}/leaderboard`;
@@ -45,31 +46,42 @@ export default function Victory(props) {
       diff_int: props.diff,
     };
     submitLeader(victor);
-    getSubmitted(true)
+    getSubmitted(true);
   }
 
   return (
     <>
-      <div style={{display: submitted ? 'none' : 'box'}}>
-        <h1>Congrats, you beat a computer selecting moves at random.</h1>
-        <h3>Please enter your 6 character name to be immortalized briefly.</h3>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="name"></label>
-          <input
-            id="name"
-            type="text"
-            required
-            maxLength="8"
-            placeholder="Your name here..."
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></input>
-          <input type="submit"></input>
-        </form>
-      </div>
-      <div style={{display: submitted ? 'box' : 'none'}}>
-        <Reset />
-      </div>
+      {props.won ? (
+        <div>
+          <div style={{ display: submitted ? "none" : "box" }}>
+            <h1>Congrats, you beat a computer selecting moves at random.</h1>
+            <h3>
+              Please enter your 6 character name to be immortalized briefly.
+            </h3>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="name"></label>
+              <input
+                id="name"
+                type="text"
+                required
+                maxLength="8"
+                placeholder="Your name here..."
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              ></input>
+              <input type="submit"></input>
+            </form>
+          </div>
+          <div style={{ display: submitted ? "box" : "none" }}>
+            <Reset />
+          </div>
+        </div>
+      ) : (
+        <>
+          <h1>You appear to have gotten here in error, please return to </h1>
+          <Link to="/">the Homepage</Link>
+        </>
+      )}
     </>
   );
 }

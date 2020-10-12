@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Route } from 'react-router-dom'
 import Square from "./Square";
 import Victory from "./Victory"
 import Loss from "./Loss"
@@ -66,7 +67,7 @@ function Game(props) {
 
   useEffect(() => {
     if (gameState.player1Moves.length === 0) {
-      // Activate loss
+      // Activate loss // use History to send player to Loss
       // setGameState({
       //   ...gameState,
       //   won: true,
@@ -87,6 +88,7 @@ function Game(props) {
       ));
     } else {
       // setBoard
+      // Check for victory here, and use History to send player to victory
       const moves = boardMethods.populatePlayerMoves(-1, 1, gameState)
       setGameState(prevGameState => (
         { ...prevGameState, player2Moves: moves, player1Turn: true }
@@ -134,10 +136,9 @@ function Game(props) {
         [i, j + 1],
       ];
       const threatenedArray = possibleVictims.filter((position) => {
-        return (
-          gameState.captured.includes(position) ===
-          gameState.captured.includes(gameState.selected)
-        );
+        const attacker = boardMethods.checkState(gameState.threatened, position)
+        const defender = boardMethods.checkState(gameState.threatened, gameState.selected)
+        return attacker === defender;
       });
       setGameState(prevGameState => (
         { ...prevGameState, threatened: threatenedArray }
@@ -187,6 +188,12 @@ function Game(props) {
           </div>
         );
       })}
+      <Route path="/victory">
+        <Victory won={gameState.won} />
+      </Route>
+      <Route path="Loss">
+        <Loss />
+      </Route>
     </div>
   );
 }
