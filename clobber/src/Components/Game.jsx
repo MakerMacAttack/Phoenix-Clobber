@@ -98,7 +98,7 @@ function Game(props) {
         { ...prevGameState, player2Moves: moves, player1Turn: true, }
       ));
       console.log(gameState.player2Moves);
-      boardMethods.computerValidSelection(gameState, setGameState)
+      boardMethods.computerValidSelection(moves, gameState, setGameState)
     }
   }, [gameState.player1Turn]);
 
@@ -114,7 +114,7 @@ function Game(props) {
     if (gameState.newCaptured) {
       if (gameState.captured.includes(gameState.newCaptured)) {
         const newList = gameState.captured.filter(
-          (position) => position !== gameState.newCaptured
+          (position) => !boardMethods.checkState(gameState.newCaptured, position)
         );
         setGameState((prevGameState) => ({
           ...prevGameState,
@@ -128,7 +128,7 @@ function Game(props) {
       }
       setGameState((prevGameState) => ({
         ...prevGameState,
-        empty: [...prevGameState.empty, prevGameState.selected],
+        empty: [...prevGameState.empty, prevGameState.selected], // This seems to be what's going wrong
         selected: "",
         newCaptured: "",
       }));
