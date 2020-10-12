@@ -76,9 +76,8 @@ export function populatePlayerMoves(attacker, defender, prevState) {
 }
 
 export function makeMove(moveArr, set) {
-  console.log("make move called");
   setTimeout(set(prevState => (
-    {...prevState, empty: [...prevState.empty, moveArr[0]]} // I want to make this selected, see Game 128
+    {...prevState, selected: moveArr[0]} // I want to make this selected, see Game 128
   )), 2000)
   setTimeout(set(prevState => (
     {...prevState, newCaptured: moveArr[1]}

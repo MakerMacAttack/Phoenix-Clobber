@@ -4,7 +4,7 @@ import Square from "./Square";
 import Victory from "./Victory";
 import Loss from "./Loss";
 import boardMethods from "../services/board";
-import ai from "../services/ai";
+// import ai from "../services/ai";
 
 function Game(props) {
   const [gameState, setGameState] = useState({
@@ -128,7 +128,7 @@ function Game(props) {
         empty: [...prevGameState.empty, prevGameState.selected], // This seems to be what's going wrong
         selected: "",
         newCaptured: "",
-        player1turn: !prevGameState.player1turn
+        player1Turn: !(prevGameState.player1Turn)
       }));
     }
   }, [gameState.newCaptured]);
