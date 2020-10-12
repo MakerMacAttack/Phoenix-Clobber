@@ -4,7 +4,6 @@ import Square from "./Square";
 import Victory from "./Victory";
 import Loss from "./Loss";
 import boardMethods from "../services/board";
-// import ai from "../services/ai";
 
 function Game(props) {
   const [gameState, setGameState] = useState({
@@ -21,19 +20,8 @@ function Game(props) {
     newCaptured: "",
     difficulty: props.difficulty,
   });
-  // const [player1Turn, setPlayer1Turn] = useState(true)
-  // const [won, setWon] = useState(false) // Still need to handle victory
-  // const [player1Moves, setPlayer1Moves] = useState([])
-  // const [player2Moves, setPlayer2Moves] = useState([])
-  // const [board, setBoard] = useState([]) // it's possible I don't need the board at this scope, only in board.js
-  // const [captured, setCaptured] = useState([])
-  // const [empty, setEmpty] = useState([])
-  // const [valid, setValid] = useState([])
-  // const [selected, setSelected] = useState('')
-  // const [threatened, setThreatened] = useState([])
-  // const [newCaptured, setNewCaptured] = useState('')
 
-  const history = useHistory()
+  const history = useHistory();
 
   const columns = 5;
   const rows = 6;
@@ -46,28 +34,6 @@ function Game(props) {
     column.push(i);
   }
 
-  // useEffect(() => {
-  //   setGameState({
-  //     ...gameState,
-  //     board: boardMethods.createBoard(),
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   if (!gameState.player1Turn) {
-  //     console.log("inside computer valid selection");
-  //     if (gameState.player2Moves.length > 0) {
-  //       setGameState((prevGameState) => ({
-  //         ...prevGameState,
-  //         valid: gameState.player2Moves.map((moves) => moves[0]),
-  //       }));
-  //       boardMethods.makeMove(ai.easyAI(gameState.valid), setGameState);
-  //     } else {
-  //       setGameState((prevGameState) => ({ ...prevGameState, won: true })); // use History to send player to Victory
-  //     }
-  //   }
-  // }, [gameState.player2Moves]);
-
   useEffect(() => {
     setGameState((prevGameState) => ({
       ...prevGameState,
@@ -79,37 +45,33 @@ function Game(props) {
     if (gameState.player1Turn) {
       const moves = boardMethods.populatePlayerMoves(1, -1, gameState);
       if (moves.length === 0) {
-        history.push('/loss')
+        history.push("/play/loss");
       }
-      setGameState(prevGameState => ({ ...prevGameState, player1Moves: moves }));
+      setGameState((prevGameState) => ({
+        ...prevGameState,
+        player1Moves: moves,
+      }));
     } else {
       const moves = boardMethods.populatePlayerMoves(-1, 1, gameState);
       if (moves.length === 0) {
-        setGameState(prevGameState => (
-          { ...prevGameState, won: true }
-        ))
-        history.push('/victory')
+        setGameState((prevGameState) => ({ ...prevGameState, won: true }));
+        history.push("/play/victory");
       }
-      setGameState(prevGameState => (
-        { ...prevGameState, player2Moves: moves }
-      ));
-      boardMethods.computerValidSelection(moves, gameState, setGameState) // and for some reason this isn't working
+      setGameState((prevGameState) => ({
+        ...prevGameState,
+        player2Moves: moves,
+      }));
+      boardMethods.computerValidSelection(moves, gameState, setGameState); // and for some reason this isn't working
     }
   }, [gameState.player1Turn]);
 
-  // useEffect(() => {
-  //   // I don't understand why this isn't working
-  //   boardMethods.populatePlayerMoves(1, -1, setGameState, gameState);
-  // }, []);
-
-  // A move has a Selected and a Captured. First the captured square is properly sorted into captured.
-  // Then the Selected square is added to empty. Then both are cleared for the next move.
   useEffect(() => {
     setGameState((prevGameState) => ({ ...prevGameState, threatened: [] }));
     if (gameState.newCaptured) {
       if (boardMethods.checkState(gameState.captured, gameState.newCaptured)) {
-        const newList = gameState.captured.filter(
-          (position) => boardMethods.checkState(gameState.newCaptured, position)
+        const newList = gameState.captured.filter((position) => {
+          return !(position[0] === gameState.newCaptured[0] && position[1] === gameState.newCaptured[1])
+        }
         );
         setGameState((prevGameState) => ({
           ...prevGameState,
@@ -126,7 +88,7 @@ function Game(props) {
         empty: [...prevGameState.empty, prevGameState.selected],
         selected: "",
         newCaptured: "",
-        player1Turn: !(prevGameState.player1Turn)
+        player1Turn: !prevGameState.player1Turn,
       }));
     }
   }, [gameState.newCaptured]);
@@ -163,12 +125,14 @@ function Game(props) {
     }));
   }, []);
 
-  // for when I need it
-
-  //remember that populate now returns the board so set it
-
   return (
     <div className="board">
+      <Route path="/play/victory">
+        <Victory won={gameState.won} empty={gameState.empty} />
+      </Route>
+      <Route path="play/loss">
+        <Loss />
+      </Route>
       {row.map((i) => {
         return (
           <div className="row" key={i}>
@@ -200,12 +164,6 @@ function Game(props) {
           </div>
         );
       })}
-      <Route path="/victory">
-        <Victory won={gameState.won} />
-      </Route>
-      <Route path="/loss">
-        <Loss />
-      </Route>
     </div>
   );
 }
