@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Route } from 'react-router-dom'
+import { Route } from "react-router-dom";
 import Square from "./Square";
-import Victory from "./Victory"
-import Loss from "./Loss"
+import Victory from "./Victory";
+import Loss from "./Loss";
 import boardMethods from "../services/board";
 import ai from "../services/ai";
 
@@ -19,7 +19,7 @@ function Game(props) {
     selected: "",
     threatened: [],
     newCaptured: "",
-    difficulty: props.difficulty
+    difficulty: props.difficulty,
   });
   // const [player1Turn, setPlayer1Turn] = useState(true)
   // const [won, setWon] = useState(false) // Still need to handle victory
@@ -51,22 +51,20 @@ function Game(props) {
   //   });
   // }, []);
 
-  useEffect(() => {
-    if (!gameState.player1Turn) {
-    if (gameState.player2Moves.length > 0) {
-      setGameState(prevGameState => (
-        { ...prevGameState, valid: gameState.player2Moves.map((moves) => moves[0]) }
-      ));
-      boardMethods.makeMove(
-        ai.easyAI(gameState.valid),
-        setGameState
-      );
-    } else {
-      setGameState(prevGameState => (
-        { ...prevGameState, won: true } // use History to send player to Victory
-      ))
-    }}
-  }, [gameState.player2Moves]);
+  // useEffect(() => {
+  //   if (!gameState.player1Turn) {
+  //     console.log("inside computer valid selection");
+  //     if (gameState.player2Moves.length > 0) {
+  //       setGameState((prevGameState) => ({
+  //         ...prevGameState,
+  //         valid: gameState.player2Moves.map((moves) => moves[0]),
+  //       }));
+  //       boardMethods.makeMove(ai.easyAI(gameState.valid), setGameState);
+  //     } else {
+  //       setGameState((prevGameState) => ({ ...prevGameState, won: true })); // use History to send player to Victory
+  //     }
+  //   }
+  // }, [gameState.player2Moves]);
 
   useEffect(() => {
     if (gameState.player1Moves.length === 0) {
@@ -76,26 +74,31 @@ function Game(props) {
       //   won: true,
       // });
     }
-    setGameState(prevGameState => (
-      { ...prevGameState, valid: gameState.player1Moves.map((moves) => moves[0]) }
-    ));
+    setGameState((prevGameState) => ({
+      ...prevGameState,
+      valid: gameState.player1Moves.map((moves) => moves[0]),
+    }));
   }, [gameState.player1Moves]);
 
   useEffect(() => {
     if (gameState.player1Turn) {
       // setBoard
-      const moves = boardMethods.populatePlayerMoves(1, -1, gameState)
+      const moves = boardMethods.populatePlayerMoves(1, -1, gameState);
       // console.log("in the useEffect Moves: ", moves);
-      setGameState(prevGameState => ( // WHAT THE LITERAL FUCK
-        { ...prevGameState, player1Moves: moves }
-      ));
+      setGameState((
+        prevGameState // WHAT THE LITERAL FUCK
+      ) => ({ ...prevGameState, player1Moves: moves }));
     } else {
       // setBoard
       // Check for victory here, and use History to send player to victory
-      const moves = boardMethods.populatePlayerMoves(-1, 1, gameState)
+      console.log("inside computer turn");
+      const moves = boardMethods.populatePlayerMoves(-1, 1, gameState);
+      console.log("moves is ",moves);
       setGameState(prevGameState => (
-        { ...prevGameState, player2Moves: moves, player1Turn: true }
+        { ...prevGameState, player2Moves: moves, player1Turn: true, }
       ));
+      console.log(gameState.player2Moves);
+      boardMethods.computerValidSelection(gameState, setGameState)
     }
   }, [gameState.player1Turn]);
 
@@ -107,25 +110,28 @@ function Game(props) {
   // A move has a Selected and a Captured. First the captured square is properly sorted into captured.
   // Then the Selected square is added to empty. Then both are cleared for the next move.
   useEffect(() => {
-    setGameState(prevGameState => (
-      { ...prevGameState, threatened: [] }
-    ));
+    setGameState((prevGameState) => ({ ...prevGameState, threatened: [] }));
     if (gameState.newCaptured) {
       if (gameState.captured.includes(gameState.newCaptured)) {
         const newList = gameState.captured.filter(
           (position) => position !== gameState.newCaptured
         );
-        setGameState(prevGameState => (
-          { ...prevGameState, captured: newList }
-        ));
+        setGameState((prevGameState) => ({
+          ...prevGameState,
+          captured: newList,
+        }));
       } else {
-        setGameState(prevGameState => (
-          { ...prevGameState, captured: [...prevGameState.captured, prevGameState.newCaptured], }
-        ));
+        setGameState((prevGameState) => ({
+          ...prevGameState,
+          captured: [...prevGameState.captured, prevGameState.newCaptured],
+        }));
       }
-      setGameState(prevGameState => (
-        { ...prevGameState, empty: [...prevGameState.empty, prevGameState.selected], selected: "", newCaptured: "" }
-      ));
+      setGameState((prevGameState) => ({
+        ...prevGameState,
+        empty: [...prevGameState.empty, prevGameState.selected],
+        selected: "",
+        newCaptured: "",
+      }));
     }
   }, [gameState.newCaptured]);
 
@@ -139,22 +145,26 @@ function Game(props) {
         [i, j + 1],
       ];
       const threatenedArray = possibleVictims.filter((position) => {
-        const attacker = boardMethods.checkState(gameState.captured, position)
-        const defender = boardMethods.checkState(gameState.captured, gameState.selected)
+        const attacker = boardMethods.checkState(gameState.captured, position);
+        const defender = boardMethods.checkState(
+          gameState.captured,
+          gameState.selected
+        );
         return attacker === defender;
       });
-      setGameState(prevGameState => (
-        { ...prevGameState, threatened: threatenedArray }
-  ));
+      setGameState((prevGameState) => ({
+        ...prevGameState,
+        threatened: threatenedArray,
+      }));
     }
   }, [gameState.selected]);
 
   useEffect(() => {
-    const moves = boardMethods.populatePlayerMoves(1, -1, gameState)
-    setGameState(prevGameState => (
-      {...prevGameState, player1Moves: moves}
-    )
-    );
+    const moves = boardMethods.populatePlayerMoves(1, -1, gameState);
+    setGameState((prevGameState) => ({
+      ...prevGameState,
+      player1Moves: moves,
+    }));
   }, []);
 
   // for when I need it
@@ -168,10 +178,10 @@ function Game(props) {
           <div className="row" key={i}>
             {column.map((j) => {
               const id = [i, j];
-              const potential = boardMethods.checkState(gameState.valid, id)
-              const siege = boardMethods.checkState(gameState.threatened, id)
-              const hostage = boardMethods.checkState(gameState.captured, id)
-              const abandonded = boardMethods.checkState(gameState.empty, id)
+              const potential = boardMethods.checkState(gameState.valid, id);
+              const siege = boardMethods.checkState(gameState.threatened, id);
+              const hostage = boardMethods.checkState(gameState.captured, id);
+              const abandonded = boardMethods.checkState(gameState.empty, id);
               return (
                 <Square
                   key={id}
@@ -182,7 +192,10 @@ function Game(props) {
                   gameState={gameState}
                   empty={abandonded}
                   captured={hostage}
-                  selected={id[0] === gameState.selected[0] && id[1] === gameState.selected[1]}
+                  selected={
+                    id[0] === gameState.selected[0] &&
+                    id[1] === gameState.selected[1]
+                  }
                   valid={potential}
                   threatened={siege}
                 />

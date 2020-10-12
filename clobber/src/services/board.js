@@ -1,3 +1,4 @@
+import { easyAI } from './ai'
 
 export function createBoard() {
   let newBoard = []
@@ -90,10 +91,29 @@ export function checkState(state, id) {
   return contains
 }
 
+export function computerValidSelection(gameState, setGameState) {
+  if (!gameState.player1Turn) {
+    console.log("inside computer valid selection");
+    console.log(gameState.player2Moves);
+    if (gameState.player2Moves.length > 0) {
+      setGameState((prevGameState) => ({
+        ...prevGameState,
+        valid: gameState.player2Moves.map((moves) => moves[0]),
+      }));
+      console.log(gameState.valid);
+      const move = easyAI(gameState.player2Moves)
+      makeMove(move, setGameState);
+    } else {
+      setGameState((prevGameState) => ({ ...prevGameState, won: true })); // use History to send player to Victory
+    }
+  }
+}
+
 export default {
   createBoard,
   updateBoard,
   populatePlayerMoves,
   makeMove,
-  checkState
+  checkState,
+  computerValidSelection
 }
