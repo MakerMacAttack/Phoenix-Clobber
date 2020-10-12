@@ -87,7 +87,6 @@ export function checkState(state, id) {
       contains = true
     }
   })
-  console.log(id, contains);
   return contains
 }
 

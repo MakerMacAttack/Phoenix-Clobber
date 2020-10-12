@@ -4,11 +4,10 @@ function Square(prop) {
 
   function handleClick() {
     if (prop.threatened) {
-      prop.setGameState({
-        ...prop.gameState,
-        newCaptured: prop.id,
-        player1Turn: false
-      })
+      prop.setGameState(prevGameState => (
+        { ...prevGameState, newCaptured: prop.id, player1Turn: false }
+      ))
+      console.log("player 1 turn false");
     } else if (prop.valid) {
       prop.setGameState(prevState => (
         { ...prevState, selected: prop.id }

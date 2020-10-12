@@ -52,6 +52,7 @@ function Game(props) {
   // }, []);
 
   useEffect(() => {
+    if (!gameState.player1Turn) {
     if (gameState.player2Moves.length > 0) {
       setGameState(prevGameState => (
         { ...prevGameState, valid: gameState.player2Moves.map((moves) => moves[0]) }
@@ -61,8 +62,10 @@ function Game(props) {
         setGameState
       );
     } else {
-
-    }
+      setGameState(prevGameState => (
+        { ...prevGameState, won: true } // use History to send player to Victory
+      ))
+    }}
   }, [gameState.player2Moves]);
 
   useEffect(() => {
