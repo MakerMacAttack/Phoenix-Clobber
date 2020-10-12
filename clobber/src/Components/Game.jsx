@@ -91,14 +91,11 @@ function Game(props) {
     } else {
       // setBoard
       // Check for victory here, and use History to send player to victory
-      console.log("inside computer turn");
       const moves = boardMethods.populatePlayerMoves(-1, 1, gameState);
-      console.log("moves is ",moves);
       setGameState(prevGameState => (
-        { ...prevGameState, player2Moves: moves, player1Turn: true, }
+        { ...prevGameState, player2Moves: moves }
       ));
-      console.log(gameState.player2Moves);
-      boardMethods.computerValidSelection(moves, gameState, setGameState)
+      boardMethods.computerValidSelection(moves, gameState, setGameState) // and for some reason this isn't working
     }
   }, [gameState.player1Turn]);
 
@@ -112,9 +109,9 @@ function Game(props) {
   useEffect(() => {
     setGameState((prevGameState) => ({ ...prevGameState, threatened: [] }));
     if (gameState.newCaptured) {
-      if (gameState.captured.includes(gameState.newCaptured)) {
+      if (boardMethods.checkState(gameState.captured, gameState.newCaptured)) {
         const newList = gameState.captured.filter(
-          (position) => !boardMethods.checkState(gameState.newCaptured, position)
+          (position) => boardMethods.checkState(gameState.newCaptured, position)
         );
         setGameState((prevGameState) => ({
           ...prevGameState,
@@ -131,6 +128,7 @@ function Game(props) {
         empty: [...prevGameState.empty, prevGameState.selected], // This seems to be what's going wrong
         selected: "",
         newCaptured: "",
+        player1turn: !prevGameState.player1turn
       }));
     }
   }, [gameState.newCaptured]);

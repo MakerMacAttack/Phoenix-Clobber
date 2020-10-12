@@ -76,12 +76,13 @@ export function populatePlayerMoves(attacker, defender, prevState) {
 }
 
 export function makeMove(moveArr, set) {
+  console.log("make move called");
   setTimeout(set(prevState => (
-    {...prevState, empty: [...prevState.empty, moveArr[0]]} // I want to make this selected, see Game 131
+    {...prevState, empty: [...prevState.empty, moveArr[0]]} // I want to make this selected, see Game 128
   )), 2000)
   setTimeout(set(prevState => (
     {...prevState, newCaptured: moveArr[1]}
-  )), 2000)
+  )), 4000)
 }
 
 export function checkState(state, id) {
@@ -96,14 +97,11 @@ export function checkState(state, id) {
 
 export function computerValidSelection(moves, gameState, setGameState) {
   if (!gameState.player1Turn) {
-    console.log("inside computer valid selection");
-    console.log(gameState.player2Moves);
     if (moves.length > 0) {
       setGameState((prevGameState) => ({
         ...prevGameState,
         valid: moves.map((moves) => moves[0]),
       }));
-      console.log(gameState.valid);
       const move = easyAI(moves)
       makeMove(move, setGameState);
     } else {
