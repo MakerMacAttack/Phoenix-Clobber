@@ -4,6 +4,7 @@ import Reset from "./Reset";
 
 export default function Victory(props) {
   const [name, setName] = useState("");
+  const [submitted, getSubmitted] = useState(false)
 
   async function submitLeader(victor) {
     const airtableURL = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE}/leaderboard`;
@@ -48,7 +49,7 @@ export default function Victory(props) {
 
   return (
     <>
-      <div>
+      <div style={{display: submitted ? 'none' : 'box'}}>
         <h1>Congrats, you beat a computer selecting moves at random.</h1>
         <h3>Please enter your 6 character name to be immortalized briefly.</h3>
         <form onSubmit={handleSubmit}>
@@ -64,6 +65,9 @@ export default function Victory(props) {
           ></input>
           <input type="submit"></input>
         </form>
+      </div>
+      <div style={{display: submitted ? 'box' : 'none'}}>
+        <Reset />
       </div>
     </>
   );
