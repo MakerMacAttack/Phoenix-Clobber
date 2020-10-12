@@ -136,8 +136,8 @@ function Game(props) {
         [i, j + 1],
       ];
       const threatenedArray = possibleVictims.filter((position) => {
-        const attacker = boardMethods.checkState(gameState.threatened, position)
-        const defender = boardMethods.checkState(gameState.threatened, gameState.selected)
+        const attacker = boardMethods.checkState(gameState.captured, position)
+        const defender = boardMethods.checkState(gameState.captured, gameState.selected)
         return attacker === defender;
       });
       setGameState(prevGameState => (
