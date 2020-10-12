@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import Square from "./Square";
 import Victory from "./Victory";
 import Loss from "./Loss";
@@ -32,6 +32,8 @@ function Game(props) {
   // const [selected, setSelected] = useState('')
   // const [threatened, setThreatened] = useState([])
   // const [newCaptured, setNewCaptured] = useState('')
+
+  const history = useHistory()
 
   const columns = 5;
   const rows = 6;
@@ -67,13 +69,6 @@ function Game(props) {
   // }, [gameState.player2Moves]);
 
   useEffect(() => {
-    if (gameState.player1Moves.length === 0) {
-      // Activate loss // use History to send player to Loss
-      // setGameState({
-      //   ...gameState,
-      //   won: true,
-      // });
-    }
     setGameState((prevGameState) => ({
       ...prevGameState,
       valid: gameState.player1Moves.map((moves) => moves[0]),
@@ -82,16 +77,19 @@ function Game(props) {
 
   useEffect(() => {
     if (gameState.player1Turn) {
-      // setBoard
       const moves = boardMethods.populatePlayerMoves(1, -1, gameState);
-      // console.log("in the useEffect Moves: ", moves);
-      setGameState((
-        prevGameState // WHAT THE LITERAL FUCK
-      ) => ({ ...prevGameState, player1Moves: moves }));
+      if (moves.length === 0) {
+        history.push('/loss')
+      }
+      setGameState(prevGameState => ({ ...prevGameState, player1Moves: moves }));
     } else {
-      // setBoard
-      // Check for victory here, and use History to send player to victory
       const moves = boardMethods.populatePlayerMoves(-1, 1, gameState);
+      if (moves.length === 0) {
+        setGameState(prevGameState => (
+          { ...prevGameState, won: true }
+        ))
+        history.push('/victory')
+      }
       setGameState(prevGameState => (
         { ...prevGameState, player2Moves: moves }
       ));
@@ -125,7 +123,7 @@ function Game(props) {
       }
       setGameState((prevGameState) => ({
         ...prevGameState,
-        empty: [...prevGameState.empty, prevGameState.selected], // This seems to be what's going wrong
+        empty: [...prevGameState.empty, prevGameState.selected],
         selected: "",
         newCaptured: "",
         player1Turn: !(prevGameState.player1Turn)
@@ -205,7 +203,7 @@ function Game(props) {
       <Route path="/victory">
         <Victory won={gameState.won} />
       </Route>
-      <Route path="Loss">
+      <Route path="/loss">
         <Loss />
       </Route>
     </div>
