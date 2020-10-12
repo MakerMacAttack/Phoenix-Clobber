@@ -1,3 +1,5 @@
+// This entire component is obsolete
+
 import React from 'react';
 import { populatePlayerMoves } from '../services/board';
 

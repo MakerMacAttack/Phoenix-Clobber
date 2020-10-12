@@ -45,6 +45,7 @@ export default function Victory(props) {
       diff_int: props.diff,
     };
     submitLeader(victor);
+    getSubmitted(true)
   }
 
   return (

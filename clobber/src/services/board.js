@@ -16,10 +16,10 @@ export function updateBoard(prev) {
   let updatedBoard = createBoard()
   prev.captured.forEach(([i, j]) => updatedBoard[i][j] = updatedBoard[i][j] * -1) // I suppose that somewhere I should filter out captured by empty cuz if a square is empty I don't care if it was ever captured.
   prev.empty.forEach(([i, j]) => updatedBoard[i][j] = 0) // Come back and make these ! and null if I change the math system.
-  return updatedBoard // find a better way to do this that doesn't need me to pass set.
+  return updatedBoard
 }
 
-export function populatePlayerMoves(attacker, defender, set, prevState) {
+export function populatePlayerMoves(attacker, defender, prevState) {
   const board = updateBoard(prevState)
   const moves = []
   for (let i = 0; i < 6; i++){
@@ -74,17 +74,27 @@ export function populatePlayerMoves(attacker, defender, set, prevState) {
   return(moves)
 }
 
-export function makeMove(moveArr, set, prev) {
-  set({
-    ...prev,
-    empty: [...prev.empty, moveArr[0]],
-    newCaptured: moveArr[1]
+export function makeMove(moveArr, set) {
+  set(prevState => (
+    {...prevState, empty: [...prevState.empty, moveArr[0]], newCaptured: moveArr[1]}
+  ))
+}
+
+export function checkState(state, id) {
+  let contains = false;
+  state.forEach(square => {
+    if (square[0] === id[0] && square[1] === id[1]) {
+      contains = true
+    }
   })
+  console.log(id, contains);
+  return contains
 }
 
 export default {
   createBoard,
   updateBoard,
   populatePlayerMoves,
-  makeMove
+  makeMove,
+  checkState
 }

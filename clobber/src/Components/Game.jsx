@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Square from "./Square";
-import Button from "./Button";
 import Victory from "./Victory"
 import Loss from "./Loss"
 import boardMethods from "../services/board";
@@ -19,7 +18,6 @@ function Game(props) {
     selected: "",
     threatened: [],
     newCaptured: "",
-    begun: false,
     difficulty: props.difficulty
   });
   // const [player1Turn, setPlayer1Turn] = useState(true)
@@ -54,15 +52,15 @@ function Game(props) {
 
   useEffect(() => {
     if (gameState.player2Moves.length > 0) {
-      setGameState({
-        ...gameState,
-        valid: gameState.player2Moves.map((moves) => moves[0]),
-      });
+      setGameState(prevGameState => (
+        { ...prevGameState, valid: gameState.player2Moves.map((moves) => moves[0]) }
+      ));
       boardMethods.makeMove(
         ai.easyAI(gameState.valid),
-        setGameState,
-        gameState
+        setGameState
       );
+    } else {
+
     }
   }, [gameState.player2Moves]);
 
@@ -74,28 +72,25 @@ function Game(props) {
       //   won: true,
       // });
     }
-    setGameState({
-      ...gameState,
-      valid: gameState.player1Moves.map((moves) => moves[0]),
-    });
+    setGameState(prevGameState => (
+      { ...prevGameState, valid: gameState.player1Moves.map((moves) => moves[0]) }
+    ));
   }, [gameState.player1Moves]);
 
   useEffect(() => {
     if (gameState.player1Turn) {
       // setBoard
-      const moves = boardMethods.populatePlayerMoves(1, -1, setGameState, gameState)
+      const moves = boardMethods.populatePlayerMoves(1, -1, gameState)
       // console.log("in the useEffect Moves: ", moves);
       setGameState(prevGameState => ( // WHAT THE LITERAL FUCK
-        {...prevGameState, player1Moves: moves}
+        { ...prevGameState, player1Moves: moves }
       ));
     } else {
       // setBoard
-      const moves = boardMethods.populatePlayerMoves(-1, 1, setGameState, gameState)
-      setGameState({
-        ...gameState,
-        player2Moves: moves,
-        player1Turn: true
-      });
+      const moves = boardMethods.populatePlayerMoves(-1, 1, gameState)
+      setGameState(prevGameState => (
+        { ...prevGameState, player2Moves: moves, player1Turn: true }
+      ));
     }
   }, [gameState.player1Turn]);
 
@@ -107,31 +102,25 @@ function Game(props) {
   // A move has a Selected and a Captured. First the captured square is properly sorted into captured.
   // Then the Selected square is added to empty. Then both are cleared for the next move.
   useEffect(() => {
-    setGameState({
-      ...gameState,
-      threatened: [],
-    });
+    setGameState(prevGameState => (
+      { ...prevGameState, threatened: [] }
+    ));
     if (gameState.newCaptured) {
       if (gameState.captured.includes(gameState.newCaptured)) {
         const newList = gameState.captured.filter(
           (position) => position !== gameState.newCaptured
         );
-        setGameState({
-          ...gameState,
-          captured: newList,
-        });
+        setGameState(prevGameState => (
+          { ...prevGameState, captured: newList }
+        ));
       } else {
-        setGameState({
-          ...gameState,
-          captured: [...gameState.captured, gameState.newCaptured],
-        });
+        setGameState(prevGameState => (
+          { ...prevGameState, captured: [...prevGameState.captured, prevGameState.newCaptured], }
+        ));
       }
-      setGameState({
-        ...gameState,
-        empty: [...gameState.empty, gameState.selected],
-        selected: "",
-        newCaptured: "", // This would be slightly simpler if I could get the dependency to only trigger when something is in NewCaptured.
-      });
+      setGameState(prevGameState => (
+        { ...prevGameState, empty: [...prevGameState.empty, prevGameState.selected], selected: "", newCaptured: "" }
+      ));
     }
   }, [gameState.newCaptured]);
 
@@ -150,18 +139,18 @@ function Game(props) {
           gameState.captured.includes(gameState.selected)
         );
       });
-      setGameState({
-        ...gameState,
-        threatened: threatenedArray,
-      });
+      setGameState(prevGameState => (
+        { ...prevGameState, threatened: threatenedArray }
+  ));
     }
   }, [gameState.selected]);
 
   useEffect(() => {
-    setGameState({
-      ...gameState,
-      board: boardMethods.populatePlayerMoves(1, -1, setGameState, gameState),
-    });
+    const moves = boardMethods.populatePlayerMoves(1, -1, gameState)
+    setGameState(prevGameState => (
+      {...prevGameState, player1Moves: moves}
+    )
+    );
   }, []);
 
   // for when I need it
@@ -175,6 +164,10 @@ function Game(props) {
           <div className="row" key={i}>
             {column.map((j) => {
               const id = [i, j];
+              const potential = boardMethods.checkState(gameState.valid, id)
+              const siege = boardMethods.checkState(gameState.threatened, id)
+              const hostage = boardMethods.checkState(gameState.captured, id)
+              const abandonded = boardMethods.checkState(gameState.empty, id)
               return (
                 <Square
                   key={id}
@@ -183,18 +176,17 @@ function Game(props) {
                   piece={i % 2 === j % 2 ? "blue" : "red"} // Is there a way to have one ternary and set square and piece?
                   setGameState={setGameState}
                   gameState={gameState}
-                  empty={gameState.empty.includes(id)}
-                  captured={gameState.captured.includes(id)}
-                  selected={id === gameState.selected}
-                  valid={gameState.valid.includes(id)}
-                  threatened={gameState.threatened.includes(id)}
+                  empty={abandonded}
+                  captured={hostage}
+                  selected={id[0] === gameState.selected[0] && id[1] === gameState.selected[1]}
+                  valid={potential}
+                  threatened={siege}
                 />
               );
             })}
           </div>
         );
       })}
-      <Button setGameState={setGameState} gameState={gameState} begun={gameState.begun} />
     </div>
   );
 }
