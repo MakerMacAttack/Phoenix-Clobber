@@ -1,27 +1,28 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Reset from "./Reset";
 
 export default function Victory(props) {
   const [name, setName] = useState("");
-  const [submitted, getSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  async function submitLeader(victor) {
+  const submitLeader = async (fields) => {
     const airtableURL = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE}/leaderboard`;
     await axios.post(
       airtableURL,
-      { victor },
+      { fields },
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_KEY}`,
         },
       }
     );
-  }
+  };
 
-  function handleSubmit() {
-    const turns = (props.empty.length + 1) / 2;
+  function handleSubmit(e) {
+    e.preventDefault()
+    const turns = (props.empty.length - 1) / 2;
     let difficulty = "";
     switch (props.diff) {
       case 0:
@@ -46,7 +47,7 @@ export default function Victory(props) {
       diff_int: props.diff,
     };
     submitLeader(victor);
-    getSubmitted(true);
+    setSubmitted(true);
   }
 
   return (
