@@ -43,6 +43,7 @@ export default function Leaderboard() {
   useEffect(() => {
     getLeaders();
     sortLeaders(unsorted);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

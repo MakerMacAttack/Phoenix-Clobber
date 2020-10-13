@@ -63,6 +63,7 @@ function Game(props) {
       }));
       boardMethods.computerValidSelection(moves, gameState, setGameState); // and for some reason this isn't working
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.player1Turn]);
 
   useEffect(() => {
@@ -91,6 +92,7 @@ function Game(props) {
         player1Turn: !prevGameState.player1Turn,
       }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.newCaptured]);
 
   useEffect(() => {
@@ -115,6 +117,7 @@ function Game(props) {
         threatened: threatenedArray,
       }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.selected]);
 
   useEffect(() => {
@@ -123,12 +126,13 @@ function Game(props) {
       ...prevGameState,
       player1Moves: moves,
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="board">
       <Route path="/play/victory">
-        <Victory won={gameState.won} empty={gameState.empty} />
+        <Victory won={gameState.won} empty={gameState.empty} diff={gameState.difficulty} />
       </Route>
       <Route path="play/loss">
         <Loss />
