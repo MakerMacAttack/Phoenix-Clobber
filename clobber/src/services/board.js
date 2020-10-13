@@ -76,12 +76,12 @@ export function populatePlayerMoves(attacker, defender, prevState) {
 }
 
 export function makeMove(moveArr, set) {
-  setTimeout(set(prevState => (
-    {...prevState, selected: moveArr[0]} // I want to make this selected, see Game 128
-  )), 2000)
-  setTimeout(set(prevState => (
+  setTimeout(() => {set(prevState => (
+    {...prevState, selected: moveArr[0]}
+  ))}, 2000)
+  setTimeout(() => {set(prevState => (
     {...prevState, newCaptured: moveArr[1]}
-  )), 4000)
+  ))}, 4000)
 }
 
 export function checkState(state, id) {

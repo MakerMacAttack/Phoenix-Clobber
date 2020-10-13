@@ -60,7 +60,7 @@ export default function Leaderboard() {
       <button onClick={() => sortLeaders(unsorted)}>All</button>
       <ol>
         {leaders.map((leader) => (
-          <li>
+          <li key={leader.id}>
             {leader.fields.name}: {leader.fields.difficulty},{" "}
             {leader.fields.turns}
           </li>
