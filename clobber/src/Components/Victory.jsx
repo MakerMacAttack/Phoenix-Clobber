@@ -65,7 +65,7 @@ export default function Victory(props) {
                 id="name"
                 type="text"
                 required
-                maxLength="8"
+                maxLength="6"
                 placeholder="Your name here..."
                 value={name}
                 onChange={(e) => setName(e.target.value)}

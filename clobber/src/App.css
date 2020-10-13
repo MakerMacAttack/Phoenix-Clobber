@@ -1,9 +1,13 @@
+/* header {
+  background: 
+} */
+
 .row {
   display: flex;
   align-items: center;
 }
 
-.white {
+.square {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,57 +16,47 @@
   max-height: 50px;
   height: 50px;
   border: 1px solid black;
-  background: white;
+}
+
+.white {
+  background: #DDE1E4;
 }
 
 .black {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 50px;
-  width: 50px;
-  max-height: 50px;
-  height: 50px;
-  border: 1px solid black;
-  background: black;
+  background: #0D1F2D;
+}
+
+.piece {
+  max-width: 30px;
+  width: 30px;
+  max-height: 30px;
+  height: 30px;
+  border-radius: 100%;
+  transition: .5s;
 }
 
 .red {
-  max-width: 30px;
-  width: 30px;
-  max-height: 30px;
-  height: 30px;
-  background: red;
-  border-radius: 15px;
-  /* margin: 0 auto; */
+  background: #A30000;
 }
 
 .blue {
-  max-width: 30px;
-  width: 30px;
-  max-height: 30px;
-  height: 30px;
-  background: blue;
-  border-radius: 15px;
-  /* margin: 0 auto; */
+  background: #6E75A8;
 }
 
 .board {
   border: 1px solid black;
-  /* max-width: 312px;
-  max-height: 312px; */
 }
 
 .red.captured {
-  background: blue;
+  background:#6E75A8;
 }
 
 .blue.captured {
-  background: red;
+  background: #A30000;
 }
 
 .threatened{
-  background: green !important;
+  border: 3px solid #E3B505 !important;
 }
 
 .empty {
@@ -70,9 +64,9 @@
 }
 
 .valid {
-  border: 3px solid green;
+  border: 3px dotted #84E296;
 }
 
 #selected {
-  border: 5px double purple;
+  border: 5px double #D5B0AC;
 }

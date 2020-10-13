@@ -15,10 +15,10 @@ function Square(prop) {
   }
 
   return (
-    <div className={prop.square}>
+    <div className={`square ${prop.square}`}>
       <div
         // This in general is hideous and should be cleaned up
-        className={`${prop.piece} ${prop.threatened ? "threatened" : ""} ${prop.empty ? "empty" : ""} ${prop.captured ? "captured" : ""} ${prop.valid ? "valid" : ""}`}
+        className={`piece ${prop.piece} ${prop.threatened ? "threatened" : ""} ${prop.empty ? "empty" : ""} ${prop.captured ? "captured" : ""} ${prop.valid ? "valid" : ""}`}
         id={`${prop.selected ? "selected" : ""}`}
         onClick={handleClick}></div>
     </div>
