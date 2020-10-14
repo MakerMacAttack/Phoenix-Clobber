@@ -12,8 +12,12 @@ footer p {
 }
 
 .row {
-  display: flex;
-  align-items: center;
+  display: grid;
+  width: 60vmin;
+  height: 12vmin;
+  grid-template-columns: repeat(5, 1fr);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .square {
@@ -68,9 +72,8 @@ footer p {
 
 #board {
   display: grid;
-  width: 50vmin;
-  height: 60vmin;
-  grid-template-columns: repeat(5, 1fr);
+  width: 60vmin;
+  height: 72vmin;
   grid-template-rows: repeat(6, 1fr);
   margin-left: auto;
   margin-right: auto;

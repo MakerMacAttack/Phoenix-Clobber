@@ -140,7 +140,7 @@ function Game(props) {
       <div id="board">
       {row.map((i) => {
         return (
-          <>
+          <div className="row" key={i}>
             {column.map((j) => {
               const id = [i, j];
               const potential = boardMethods.checkState(gameState.valid, id);
@@ -166,7 +166,7 @@ function Game(props) {
                 />
               );
             })}
-          </>
+          </div>
         );
       })}
       </div>
