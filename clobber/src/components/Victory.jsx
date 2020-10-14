@@ -21,7 +21,7 @@ export default function Victory(props) {
   };
 
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     const turns = (props.empty.length - 1) / 2;
     let difficulty = "";
     switch (props.diff) {
@@ -79,8 +79,17 @@ export default function Victory(props) {
         </div>
       ) : (
         <>
-          <h1>You appear to have gotten here in error, please return to </h1>
-          <Link to="/">the Homepage</Link>
+          <h1>Cheater. Get back to </h1>
+            <Link to="/">the Homepage</Link>
+            
+          <iframe
+            width="860"
+            height="645"
+            src="https://www.youtube.com/embed/DLzxrzFCyOs"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </>
       )}
     </>

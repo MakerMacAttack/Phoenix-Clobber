@@ -1,6 +1,15 @@
-/* header {
-  background: 
-} */
+header {
+  background: #553555
+}
+
+footer {
+  position: absolute;
+  bottom: 5px;
+}
+
+footer p {
+  display: inline;
+}
 
 .row {
   display: flex;
@@ -11,10 +20,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 50px;
-  width: 50px;
-  max-height: 50px;
-  height: 50px;
   border: 1px solid black;
 }
 
@@ -27,10 +32,8 @@
 }
 
 .piece {
-  max-width: 30px;
-  width: 30px;
-  max-height: 30px;
-  height: 30px;
+  width: 80%;
+  height: 80%;
   border-radius: 100%;
   transition: .5s;
 }
@@ -41,10 +44,6 @@
 
 .blue {
   background: #6E75A8;
-}
-
-.board {
-  border: 1px solid black;
 }
 
 .red.captured {
@@ -67,6 +66,29 @@
   border: 3px dotted #84E296;
 }
 
+#board {
+  display: grid;
+  width: 50vmin;
+  height: 60vmin;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
 #selected {
   border: 5px double #D5B0AC;
+}
+
+/* below is for tablet */
+
+@media screen and (min-width: 400px) {
+
+}
+
+/* below is for desktop */
+
+@media screen and (min-width: 750px) {
+
 }
