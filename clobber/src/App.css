@@ -1,5 +1,6 @@
 header {
-  background: #553555
+  background: #553555;
+  padding: 10px;
 }
 
 li {
@@ -115,6 +116,7 @@ footer p {
 
 #cheater-link {
   align-self: center;
+  font-size: 2em;
 }
 
 /* below is for tablet */
@@ -137,5 +139,9 @@ footer p {
   
   #sidebar {
     max-width: 30vw;
+    margin-top: 20px;
+    margin-right: 50px;
+    border-right: 4px solid #553555;
+    padding-right: 25px;
   }
 }
