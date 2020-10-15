@@ -19,10 +19,12 @@ function Home() {
         <Nav setAck={setAck} setLeaderboard={setLeaderboard} />
       </header>
       <main>
-        <div id="sidebar">
-          {leaderboard ? <Leaderboard set={setLeaderboard} /> : null}
-          <Instructions ack={ack} setAck={setAck} emptyEmpty={emptyEmpty} />
-        </div>
+        <Route path="/">
+          <div id="sidebar">
+            {leaderboard ? <Leaderboard set={setLeaderboard} /> : null}
+            <Instructions ack={ack} setAck={setAck} emptyEmpty={emptyEmpty} />
+          </div>
+        </Route>
         <Route path="/difficulty">
           <Difficulty set={setDifficulty} />
         </Route>
@@ -30,7 +32,7 @@ function Home() {
           <Game difficulty={difficulty} setEmptyEmpty={setEmptyEmpty} />
         </Route>
       </main>
-        <Footer />
+      <Footer />
     </>
   );
 }
