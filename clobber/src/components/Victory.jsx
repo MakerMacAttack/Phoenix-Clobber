@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import Reset from "./Reset";
 
 export default function Victory(props) {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  const history = useHistory()
 
   const submitLeader = async (fields) => {
     const airtableURL = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE}/leaderboard`;
@@ -48,6 +50,7 @@ export default function Victory(props) {
     };
     submitLeader(victor);
     setSubmitted(true);
+    history.push("/")
   }
 
   return (
