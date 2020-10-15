@@ -132,8 +132,10 @@ footer p {
     display: flex;
   }
 
-  #leader,
-  #rules {
+  /* #leader,
+  #rules */
+  
+  #sidebar {
     max-width: 30vw;
   }
 }

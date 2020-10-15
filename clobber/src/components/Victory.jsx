@@ -81,11 +81,11 @@ export default function Victory(props) {
         <>
           <h1 id="cheater-head">Cheater. Get back to </h1>
             <Link id="cheater-link" to="/">the Homepage</Link>
-            <p>There once was a man named Bertold</p>
-            <p>who drank beer when the weather grew cold.</p>
-            <p>As he reached for his cup,</p>
-            <p>NEVER GONNA GIVE YOU UP</p>
-            <p>Oh snap! You just got limerickrolled!</p>
+            <p id="limerick">There once was a man named Bertold<br />
+            who drank beer when the weather grew cold.<br />
+            As he reached for his cup,<br />
+            NEVER GONNA GIVE YOU UP<br />
+            Oh snap! You just got limerickrolled!</p>
             {/* This rickroll was a solid idea but it's taking way too much time and effort to deal with the errors of embedding a youtube clip. */}
             {/* <iframe
               title="Cheater"
