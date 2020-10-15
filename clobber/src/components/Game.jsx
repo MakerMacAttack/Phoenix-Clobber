@@ -34,9 +34,11 @@ function Game(props) {
     column.push(i);
   }
 
-  useEffect(() => props.setEmptyEmpty(gameState.empty.length === 0),
+  useEffect(
+    () => props.setEmptyEmpty(gameState.empty.length === 0),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [gameState.empty]);
+    [gameState.empty]
+  );
 
   useEffect(() => {
     setGameState((prevGameState) => ({
@@ -75,9 +77,11 @@ function Game(props) {
     if (gameState.newCaptured) {
       if (boardMethods.checkState(gameState.captured, gameState.newCaptured)) {
         const newList = gameState.captured.filter((position) => {
-          return !(position[0] === gameState.newCaptured[0] && position[1] === gameState.newCaptured[1])
-        }
-        );
+          return !(
+            position[0] === gameState.newCaptured[0] &&
+            position[1] === gameState.newCaptured[1]
+          );
+        });
         setGameState((prevGameState) => ({
           ...prevGameState,
           captured: newList,
@@ -135,44 +139,50 @@ function Game(props) {
 
   return (
     <div>
-      <Route path="/play/victory">
-        <Victory won={gameState.won} empty={gameState.empty} diff={gameState.difficulty} />
-      </Route>
-      <Route path="/play/loss">
-        <Loss />
-      </Route>
+      <div id="endgame">
+        <Route path="/play/victory">
+          <Victory
+            won={gameState.won}
+            empty={gameState.empty}
+            diff={gameState.difficulty}
+          />
+        </Route>
+        <Route path="/play/loss">
+          <Loss />
+        </Route>
+      </div>
       <div id="board">
-      {row.map((i) => {
-        return (
-          <div className="row" key={i}>
-            {column.map((j) => {
-              const id = [i, j];
-              const potential = boardMethods.checkState(gameState.valid, id);
-              const siege = boardMethods.checkState(gameState.threatened, id);
-              const hostage = boardMethods.checkState(gameState.captured, id);
-              const abandonded = boardMethods.checkState(gameState.empty, id);
-              return (
-                <Square
-                  key={id}
-                  id={id}
-                  square={i % 2 === j % 2 ? "white" : "black"} //If I change the board values to true and false this could just be, if (board[r][c])
-                  piece={i % 2 === j % 2 ? "blue" : "red"} // Is there a way to have one ternary and set square and piece?
-                  setGameState={setGameState}
-                  gameState={gameState}
-                  empty={abandonded}
-                  captured={hostage}
-                  selected={
-                    id[0] === gameState.selected[0] &&
-                    id[1] === gameState.selected[1]
-                  }
-                  valid={potential}
-                  threatened={siege}
-                />
-              );
-            })}
-          </div>
-        );
-      })}
+        {row.map((i) => {
+          return (
+            <div className="row" key={i}>
+              {column.map((j) => {
+                const id = [i, j];
+                const potential = boardMethods.checkState(gameState.valid, id);
+                const siege = boardMethods.checkState(gameState.threatened, id);
+                const hostage = boardMethods.checkState(gameState.captured, id);
+                const abandonded = boardMethods.checkState(gameState.empty, id);
+                return (
+                  <Square
+                    key={id}
+                    id={id}
+                    square={i % 2 === j % 2 ? "white" : "black"} //If I change the board values to true and false this could just be, if (board[r][c])
+                    piece={i % 2 === j % 2 ? "blue" : "red"} // Is there a way to have one ternary and set square and piece?
+                    setGameState={setGameState}
+                    gameState={gameState}
+                    empty={abandonded}
+                    captured={hostage}
+                    selected={
+                      id[0] === gameState.selected[0] &&
+                      id[1] === gameState.selected[1]
+                    }
+                    valid={potential}
+                    threatened={siege}
+                  />
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

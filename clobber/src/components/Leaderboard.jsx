@@ -63,7 +63,7 @@ export default function Leaderboard(props) {
       <button onClick={() => handleClick(2)}>Hard</button>
       <button onClick={() => handleClick(3)}>2 Player</button>
       <button onClick={() => sortLeaders(unsorted)}>All</button>
-      <ol>
+      <ul id="winners">
         <li>
           <span>Name</span>
           <span>Difficulty</span>
@@ -71,12 +71,12 @@ export default function Leaderboard(props) {
         </li>
         {leaders.map((leader) => (
           <li key={leader.id}>
-            <span>{leader.fields.name}:</span>
+            <span>{leader.fields.name}</span>
             <span>{leader.fields.difficulty}</span>
             <span>{leader.fields.turns}</span>
           </li>
         ))}
-      </ol>
+      </ul>
     </div>
   );
 }

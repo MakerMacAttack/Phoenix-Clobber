@@ -1,6 +1,11 @@
 header {
   background: #553555;
   padding: 10px;
+  font-family: 'Dosis', sans-serif;
+}
+
+header button {
+  font-family: 'Dosis', sans-serif;
 }
 
 body {
@@ -24,14 +29,16 @@ footer {
   background: #43aa8b;
   width: 100vw;
   height: 3vh;
+  font-family: 'Dosis', sans-serif;
 }
 
 footer p {
   display: inline;
 }
 
-footer a {
-  right: 5px;
+footer button {
+  font-family: 'Dosis', sans-serif;
+  margin-right: 10px;
 }
 
 .row {
@@ -110,6 +117,27 @@ footer a {
   border: 3px solid #84e296;
 }
 
+#sidebar {
+  font-family: 'Overpass Mono', monospace;
+}
+
+#sidebar button {
+  font-family: 'Overpass Mono', monospace;
+}
+
+#difficulty {
+  font-family: 'Overpass Mono', monospace;
+}
+
+#difficulty button {
+  font-family: 'Overpass Mono', monospace;
+}
+
+#winners {
+  font-family: 'Teko', sans-serif;
+  font-size: 20px;
+}
+
 #board {
   display: grid;
   width: 60vmin;
@@ -124,13 +152,24 @@ footer a {
   border: 5px double #d5b0ac;
 }
 
+#endgame {
+  font-family: 'Raleway', sans-serif;
+}
+
 #cheater-head {
   display: inline;
+  font-family: 'Raleway', sans-serif;
 }
 
 #cheater-link {
   align-self: center;
   font-size: 2em;
+  font-family: 'Raleway', sans-serif;
+}
+
+#limerick {
+  font-family: 'Tangerine', cursive;
+  font-size: 30px;
 }
 
 /* below is for tablet */

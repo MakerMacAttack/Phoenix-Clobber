@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Difficulty(props) {
   return (
-    <div>
+    <div id="difficulty">
       <h1>Difficulty</h1>
       <h3>Please select your difficulty.</h3>
       <Link to="/play"><button onClick={() => props.set(0)}>Easy</button>
