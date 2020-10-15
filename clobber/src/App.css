@@ -21,13 +21,17 @@ span {
 footer {
   position: absolute;
   bottom: 5px;
-  background: #43AA8B;
+  background: #43aa8b;
   width: 100vw;
-  height: 5vh;
+  height: 3vh;
 }
 
 footer p {
   display: inline;
+}
+
+footer a {
+  right: 5px;
 }
 
 .row {
@@ -47,38 +51,38 @@ footer p {
 }
 
 .white {
-  background: #DDE1E4;
+  background: #dde1e4;
 }
 
 .black {
-  background: #0D1F2D;
+  background: #0d1f2d;
 }
 
 .piece {
   width: 80%;
   height: 80%;
   border-radius: 100%;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .red {
-  background: #A30000;
+  background: #a30000;
 }
 
 .blue {
-  background: #6E75A8;
+  background: #6e75a8;
 }
 
 .red.captured {
-  background:#6E75A8;
+  background: #6e75a8;
 }
 
 .blue.captured {
-  background: #A30000;
+  background: #a30000;
 }
 
-.threatened{
-  border: 3px solid #E3B505 !important;
+.threatened {
+  border: 3px solid #e3b505 !important;
 }
 
 .empty {
@@ -86,8 +90,12 @@ footer p {
 }
 
 @keyframes cycle {
-  from {opacity: 1;}
-  to {opacity: .6;;}
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.6;
+  }
 }
 
 .valid {
@@ -99,7 +107,7 @@ footer p {
 }
 
 .valid:hover {
-  border: 3px solid #84E296;
+  border: 3px solid #84e296;
 }
 
 #board {
@@ -113,7 +121,7 @@ footer p {
 }
 
 #selected {
-  border: 5px double #D5B0AC;
+  border: 5px double #d5b0ac;
 }
 
 #cheater-head {
@@ -128,19 +136,10 @@ footer p {
 /* below is for tablet */
 
 @media screen and (min-width: 400px) {
-  footer a {
-    padding: 0 5px;
-  }
-  
-  footer {
-    display: flex;
-    justify-content: center;
-  }
-  
   #trademark {
-    margin: 0;
-    position: absolute;
-    left: 5px
+    margin: 0 auto 0 0;
+    /* position: absolute; */
+    left: 5px;
   }
 }
 
@@ -151,14 +150,21 @@ footer p {
     display: flex;
   }
 
-  /* #leader,
-  #rules */
-  
+  footer {
+    display: flex;
+    justify-content: center;
+    height: 5vh;
+  }
+
+  #leader,
+  #rules {
+    border-right: 4px solid #553555;
+  }
+
   #sidebar {
     max-width: 30vw;
     margin-top: 20px;
     margin-right: 50px;
-    border-right: 4px solid #553555;
     padding: 25px;
   }
 }

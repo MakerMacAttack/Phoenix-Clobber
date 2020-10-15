@@ -34,6 +34,8 @@ function Game(props) {
     column.push(i);
   }
 
+  useEffect(() => props.setEmptyEmpty(gameState.empty.length === 0), [gameState.empty]);
+
   useEffect(() => {
     setGameState((prevGameState) => ({
       ...prevGameState,
@@ -134,7 +136,7 @@ function Game(props) {
       <Route path="/play/victory">
         <Victory won={gameState.won} empty={gameState.empty} diff={gameState.difficulty} />
       </Route>
-      <Route path="play/loss">
+      <Route path="/play/loss">
         <Loss />
       </Route>
       <div id="board">

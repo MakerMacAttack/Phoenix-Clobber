@@ -11,6 +11,7 @@ function Home() {
   const [ack, setAck] = useState(false);
   const [difficulty, setDifficulty] = useState(null);
   const [leaderboard, setLeaderboard] = useState(false);
+  const [emptyEmpty, setEmptyEmpty] = useState(true);
 
   return (
     <>
@@ -20,13 +21,13 @@ function Home() {
       <main>
         <div id="sidebar">
           {leaderboard ? <Leaderboard set={setLeaderboard} /> : null}
-          <Instructions ack={ack} setAck={setAck} />
+          <Instructions ack={ack} setAck={setAck} emptyEmpty={emptyEmpty} />
         </div>
         <Route path="/difficulty">
           <Difficulty set={setDifficulty} />
         </Route>
         <Route path="/play">
-          <Game difficulty={difficulty} />
+          <Game difficulty={difficulty} setEmptyEmpty={setEmptyEmpty} />
         </Route>
       </main>
         <Footer />
