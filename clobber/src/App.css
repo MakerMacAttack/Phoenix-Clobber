@@ -73,8 +73,22 @@ footer p {
   display: none;
 }
 
+@keyframes cycle {
+  from {border: 3px dotted #84E296;}
+  to {border: 5px dotted #84E296;}
+}
+
 .valid {
   border: 3px dotted #84E296;
+  animation: cycle;
+  animation-duration: 3s;
+  animation-delay: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.valid:hover {
+  border: 3px dashed #84E296;
 }
 
 #board {
@@ -96,7 +110,7 @@ footer p {
 }
 
 #cheater-link {
-  
+  align-self: center;
 }
 
 /* below is for tablet */
