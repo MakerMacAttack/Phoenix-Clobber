@@ -5,7 +5,7 @@ header {
 li {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 60vw;
+  width: 80%;
 }
 
 span {
@@ -85,7 +85,6 @@ footer p {
 }
 
 .valid {
-  /* border: 3px dotted #84E296; */
   animation: cycle;
   animation-duration: 1s;
   animation-iteration-count: infinite;
@@ -129,5 +128,12 @@ footer p {
 /* below is for desktop */
 
 @media screen and (min-width: 750px) {
+  main {
+    display: flex;
+  }
 
+  #leader,
+  #rules {
+    max-width: 30vw;
+  }
 }

@@ -10,21 +10,25 @@ import Nav from "./Nav";
 function Home() {
   const [ack, setAck] = useState(false);
   const [difficulty, setDifficulty] = useState(null);
-  const [leaderboard, setLeaderboard] = useState(false)
+  const [leaderboard, setLeaderboard] = useState(false);
 
   return (
     <>
       <header>
         <Nav set={setAck} setLeaderboard={setLeaderboard} />
       </header>
-        {leaderboard ? <Leaderboard set={setLeaderboard} /> : null}
-      <Instructions ack={ack} set={setAck} />
-      <Route path="/difficulty">
-        <Difficulty set={setDifficulty} />
-      </Route>
-      <Route path="/play">
-        <Game difficulty={difficulty} />
-      </Route>
+      <main>
+        <div id="sidebar">
+          {leaderboard ? <Leaderboard set={setLeaderboard} /> : null}
+          <Instructions ack={ack} set={setAck} />
+        </div>
+        <Route path="/difficulty">
+          <Difficulty set={setDifficulty} />
+        </Route>
+        <Route path="/play">
+          <Game difficulty={difficulty} />
+        </Route>
+      </main>
       <footer>
         <Footer />
       </footer>

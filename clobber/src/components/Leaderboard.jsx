@@ -50,7 +50,7 @@ export default function Leaderboard(props) {
   }, []);
 
   return (
-    <>
+    <div id="leader">
       <button id="close-instructions" onClick={() => props.set(false)}>X</button>
       <h1>Leaderboard</h1>
       {/* <h2>
@@ -77,6 +77,6 @@ export default function Leaderboard(props) {
           </li>
         ))}
       </ol>
-    </>
+    </div>
   );
 }
