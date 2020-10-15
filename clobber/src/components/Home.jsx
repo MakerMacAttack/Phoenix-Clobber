@@ -15,12 +15,12 @@ function Home() {
   return (
     <>
       <header>
-        <Nav set={setAck} setLeaderboard={setLeaderboard} />
+        <Nav setAck={setAck} setLeaderboard={setLeaderboard} />
       </header>
       <main>
         <div id="sidebar">
           {leaderboard ? <Leaderboard set={setLeaderboard} /> : null}
-          <Instructions ack={ack} set={setAck} />
+          <Instructions ack={ack} setAck={setAck} />
         </div>
         <Route path="/difficulty">
           <Difficulty set={setDifficulty} />
