@@ -34,7 +34,9 @@ function Game(props) {
     column.push(i);
   }
 
-  useEffect(() => props.setEmptyEmpty(gameState.empty.length === 0), [gameState.empty]);
+  useEffect(() => props.setEmptyEmpty(gameState.empty.length === 0),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [gameState.empty]);
 
   useEffect(() => {
     setGameState((prevGameState) => ({
