@@ -29,9 +29,7 @@ function Home() {
           <Game difficulty={difficulty} />
         </Route>
       </main>
-      <footer>
         <Footer />
-      </footer>
     </>
   );
 }

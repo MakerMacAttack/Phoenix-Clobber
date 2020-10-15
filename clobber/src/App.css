@@ -3,6 +3,11 @@ header {
   padding: 10px;
 }
 
+body {
+  background-image: url("background/moroccan-flower.png");
+  /* credit: www.subtlepatterns.com */
+}
+
 li {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -88,6 +93,7 @@ footer p {
 .valid {
   animation: cycle;
   animation-duration: 1s;
+  animation-delay: 2s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
@@ -125,6 +131,17 @@ footer p {
   footer a {
     padding: 0 5px;
   }
+  
+  footer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  #trademark {
+    margin: 0;
+    position: absolute;
+    left: 5px
+  }
 }
 
 /* below is for desktop */
@@ -142,6 +159,6 @@ footer p {
     margin-top: 20px;
     margin-right: 50px;
     border-right: 4px solid #553555;
-    padding-right: 25px;
+    padding: 25px;
   }
 }
