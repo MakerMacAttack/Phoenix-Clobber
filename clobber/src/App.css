@@ -2,9 +2,15 @@ header {
   background: #553555
 }
 
-/* iframe {
-  display: block;
-} */
+li {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 60vw;
+}
+
+span {
+  border: 1px solid black;
+}
 
 footer {
   position: absolute;

@@ -53,10 +53,10 @@ export default function Leaderboard(props) {
     <>
       <button id="close-instructions" onClick={() => props.set(false)}>X</button>
       <h1>Leaderboard</h1>
-      <h2>
+      {/* <h2>
         Past winners, with the difficulty and the number of moves it took to
         win.
-      </h2>
+      </h2> */}
       <h3>Click on a button to view only results from a certain difficulty.</h3>
       <button onClick={() => handleClick(0)}>Easy</button>
       <button onClick={() => handleClick(1)}>Medium</button>
@@ -64,10 +64,16 @@ export default function Leaderboard(props) {
       <button onClick={() => handleClick(3)}>2 Player</button>
       <button onClick={() => sortLeaders(unsorted)}>All</button>
       <ol>
+        <li>
+          <span>Name</span>
+          <span>Difficulty</span>
+          <span>Turns</span>
+        </li>
         {leaders.map((leader) => (
           <li key={leader.id}>
-            {leader.fields.name}: {leader.fields.difficulty},{" "}
-            {leader.fields.turns}
+            <span>{leader.fields.name}:</span>
+            <span>{leader.fields.difficulty}</span>
+            <span>{leader.fields.turns}</span>
           </li>
         ))}
       </ol>
