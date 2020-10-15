@@ -1,4 +1,4 @@
-import { easyAI } from './ai'
+import { easyAI, mediumAI } from './ai'
 
 export function createBoard() {
   let newBoard = []
@@ -82,7 +82,18 @@ export function computerValidSelection(moves, gameState, setGameState) {
         ...prevGameState,
         valid: moves.map((moves) => moves[0]),
       }));
-      const move = easyAI(moves)
+      let move = []
+      switch (gameState.difficulty) {
+        case 0:
+          move = easyAI(moves)
+          break;
+        case 1:
+          move = mediumAI(moves)
+          break;
+        default:
+          move = easyAI(moves)
+          break;
+      }
       makeMove(move, setGameState);
     } else {
       setGameState((prevGameState) => ({ ...prevGameState, won: true })); // use History to send player to Victory
