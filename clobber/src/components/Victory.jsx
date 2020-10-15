@@ -79,18 +79,23 @@ export default function Victory(props) {
         </div>
       ) : (
         <>
-          <h1>Cheater. Get back to </h1>
-            <Link to="/">the Homepage</Link>
-            
-            <iframe
+          <h1 id="cheater-head">Cheater. Get back to </h1>
+            <Link id="cheater-link" to="/">the Homepage</Link>
+            <p>There once was a man named Bertold</p>
+            <p>who drank beer when the weather grew cold.</p>
+            <p>As he reached for his cup,</p>
+            <p>NEVER GONNA GIVE YOU UP</p>
+            <p>Oh snap! You just got limerickrolled!</p>
+            {/* This rickroll was a solid idea but it's taking way too much time and effort to deal with the errors of embedding a youtube clip. */}
+            {/* <iframe
               title="Cheater"
             width="860"
             height="645"
             src="https://www.youtube.com/embed/DLzxrzFCyOs"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+            allowFullScreen
+          ></iframe> */}
         </>
       )}
     </>

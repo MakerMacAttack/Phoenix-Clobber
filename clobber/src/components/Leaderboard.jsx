@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Leaderboard() {
+export default function Leaderboard(props) {
   const [leaders, setLeaders] = useState([]);
   const [unsorted, setUnsorted] = useState([]);
 
@@ -35,19 +35,23 @@ export default function Leaderboard() {
   }
 
   function handleClick(diff) {
-    getLeaders(); // If I can get the list to populate at the start I shouldn't need this.
+    // getLeaders(); // If I can get the list to populate at the start I shouldn't need this.
     const list = unsorted.filter((leader) => leader.fields.diff_int === diff);
     sortLeaders(list);
   }
 
   useEffect(() => {
-    getLeaders();
     sortLeaders(unsorted);
+  }, [unsorted])
+
+  useEffect(() => {
+    getLeaders();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
+      <button id="close-instructions" onClick={() => props.set(false)}>X</button>
       <h1>Leaderboard</h1>
       <h2>
         Past winners, with the difficulty and the number of moves it took to

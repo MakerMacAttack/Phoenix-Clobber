@@ -2,9 +2,16 @@ header {
   background: #553555
 }
 
+/* iframe {
+  display: block;
+} */
+
 footer {
   position: absolute;
   bottom: 5px;
+  background: #43AA8B;
+  width: 100vw;
+  height: 3vh;
 }
 
 footer p {
@@ -84,10 +91,20 @@ footer p {
   border: 5px double #D5B0AC;
 }
 
+#cheater-head {
+  display: inline;
+}
+
+#cheater-link {
+  
+}
+
 /* below is for tablet */
 
 @media screen and (min-width: 400px) {
-
+  footer a {
+    padding: 0 5px;
+  }
 }
 
 /* below is for desktop */

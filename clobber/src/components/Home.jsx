@@ -10,15 +10,14 @@ import Nav from "./Nav";
 function Home() {
   const [ack, setAck] = useState(false);
   const [difficulty, setDifficulty] = useState(null);
+  const [leaderboard, setLeaderboard] = useState(false)
 
   return (
     <>
       <header>
-        <Nav set={setAck} />
+        <Nav set={setAck} setLeaderboard={setLeaderboard} />
       </header>
-      <Route path="/hi-score">
-        <Leaderboard />
-      </Route>
+        {leaderboard ? <Leaderboard set={setLeaderboard} /> : null}
       <Instructions ack={ack} set={setAck} />
       <Route path="/difficulty">
         <Difficulty set={setDifficulty} />
