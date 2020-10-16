@@ -2,11 +2,11 @@
 
 ## Clobber
 
-Link to Deploy (Forthcoming)
+[Netlify Deploy](https://clobber.netlify.app/)
 
 ## Project Description
 
-Clobber is a react app which emulates the popular boardgame Clobber. It maintains a front-end boardgame for users to interact with while displaying high scores from an API. CSS will be used somehow. And this is a fourth sentence so I can move on.
+Clobber is a react app which emulates the popular boardgame Clobber. It maintains a front-end boardgame for users to interact with while displaying high scores from an API. The board is displayed using grid layout for a responsive lay-out. Users can choose from multiple levels of difficulty.
 
 ## Wireframes
 
@@ -80,38 +80,38 @@ I will be using a personal Airtable which will log the username, time of creatio
 
 |  Day | Deliverable | Status
 |---|---| ---|
-|October 8| Prompt / Wireframes / Priority Matrix / Timeframes | Incomplete
-|October 9| Project Approval | Incomplete
-|October 12| Specification | Incomplete
-|October 12| Core Application Structure (HTML, CSS, etc.) | Incomplete
-|October 13| Pseudocode / actual code | Incomplete
-|October 14| Initial Clickable Model  | Incomplete
-|October 15| MVP | Incomplete
+|October 8| Prompt / Wireframes / Priority Matrix / Timeframes | Complete
+|October 9| Project Approval | Complete
+|October 12| Specification | Complete
+|October 12| Core Application Structure (HTML, CSS, etc.) | Complete
+|October 13| Pseudocode / actual code | Complete
+|October 14| Initial Clickable Model  | Complete
+|October 15| MVP | Complete
 |October 16| Presentations | Incomplete
 
 ## Timeframes
 
 | Component | Priority | Estimated Time | Time Invested | Actual Time |
-| Specification | H |  3hr | :---: | :---: |
-| Psuedocode | H |  3hr | :---: | :---: |
-| Navbar | H |  2hr | :---: | :---: |
-| Instructions | H |  1hr | :---: | :---: |
-| Difficulty | M |  2hr | :---: | :---: |
-| Victory | H |  1hr | :---: | :---: |
-| Render High Scores | H |  2hr | :---: | :---: |
-| Set up Airtable | H |  2hr | :---: | :---: |
-| Connect Airtable and High Scores | H |  2hr | :---: | :---: |
-| Render Board | H |  2hr | :---: | :---: |
-| Square functionality | H |  3hr | :---: | :---: |
-| Poll all valid moves | H |  2hr | :---: | :---: |
-| Basic CSS - Square | H |  2hr | :---: | :---: |
-| Basic CSS - Everything else | H |  3hr | :---: | :---: |
-| Advanced CSS - Square | M |  3hr | :---: | :---: |
-| Advanced CSS - Board | M |  3hr | :---: | :---: |
-| Advanced CSS - Everything Else | L |  3hr | :---: | :---: |
-| Make a move | H |  3hr | :---: | :---: |
-| Update ReadME | 3hr | :---: | :---: | :---: |
-| Total | H | 41hrs| :---: | :---: |
+| Specification | H |  3hr | 3hr | 3hr |
+| Psuedocode | H |  3hr | 2hr | 2hr |
+| Navbar | H |  2hr | 3hr | 3hr |
+| Instructions | H |  1hr | 2hr | 2hr |
+| Difficulty | M |  2hr | 1hr | 1hr |
+| Victory | H |  1hr | 1hr | 1hr |
+| Render High Scores | H |  2hr | 3hr | 3hr |
+| Set up Airtable | H |  2hr | 3hr | 3hr |
+| Connect Airtable and High Scores | H |  2hr | 1hr | 1hr |
+| Render Board | H |  2hr | 3hr | 3hr |
+| Square functionality | H |  3hr | 3hr | 3hr |
+| Poll all valid moves | H |  2hr | 2hr | 2hr |
+| Basic CSS - Square | H |  2hr | 3hr | 3hr |
+| Basic CSS - Everything else | H |  3hr | 6hr | 6hr |
+| Advanced CSS - Square | M |  3hr | 3hr | 3hr |
+| Advanced CSS - Board | M |  3hr | 3hr | 3hr |
+| Advanced CSS - Everything Else | L |  3hr | 3hr | 3hr |
+| Make a move | H |  3hr | 4hr | 4hr |
+| Update ReadME | 3hr | 2hr | 2hr |
+| Total | H | 41hrs| 47hr | 47hr |
 
 ## SWOT Analysis
 
