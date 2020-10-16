@@ -20,11 +20,7 @@ export function mediumAI(validMoves, prevState) {
   //get new empty and captured
   const minOpp = spreadMoves.map(move => {
     let testEmpty = []
-    if (prevState.empty.length > 0) {
-      testEmpty = [...prevState.empty, move[0]]
-    } else {
-      testEmpty = [move[0]]
-    }
+    testEmpty = [...prevState.empty, move[0]]
     let testCaptured = []
     if (checkState(prevState.captured, move[1])) {
       testCaptured = prevState.captured.filter((position) => {
@@ -34,7 +30,7 @@ export function mediumAI(validMoves, prevState) {
         );
       });
     } else {
-      testCaptured = prevState.captured.length > 0 ? [...prevState.captured, move[1]] : [move[1]]
+      testCaptured = [...prevState.captured, move[1]]
     }
     // get a new board
     const fakeState = { empty: testEmpty, captured: testCaptured }
