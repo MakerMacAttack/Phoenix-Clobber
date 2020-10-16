@@ -104,11 +104,11 @@ I will be using a personal Airtable which will log the username, time of creatio
 | Render Board | H |  2hr | 3hr | 3hr |
 | Square functionality | H |  3hr | 3hr | 3hr |
 | Poll all valid moves | H |  2hr | 2hr | 2hr |
-| Basic CSS - Square | H |  2hr | 3hr | 3hr |
-| Basic CSS - Everything else | H |  3hr | 6hr | 6hr |
-| Advanced CSS - Square | M |  3hr | 3hr | 3hr |
-| Advanced CSS - Board | M |  3hr | 3hr | 3hr |
-| Advanced CSS - Everything Else | L |  3hr | 3hr | 3hr |
+| Basic CSS Square | H |  2hr | 3hr | 3hr |
+| Basic CSS Everything else | H |  3hr | 6hr | 6hr |
+| Advanced CSS Square | M |  3hr | 3hr | 3hr |
+| Advanced CSS Board | M |  3hr | 3hr | 3hr |
+| Advanced CSS Everything Else | L |  3hr | 3hr | 3hr |
 | Make a move | H |  3hr | 4hr | 4hr |
 | Update ReadME | H | 3hr | 2hr | 2hr |
 | Total | H | 41hrs| 47hr | 47hr |
