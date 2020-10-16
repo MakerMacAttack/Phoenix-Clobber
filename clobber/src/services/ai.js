@@ -10,6 +10,7 @@ export function easyAI(validMoves) {
 
 export function mediumAI(validMoves, prevState) {
   const spreadMoves = []
+  // validMoves is condensed, with moves grouped by pieces moving. We need every individual move.
   validMoves.forEach(move => {
     for (let i = 0; i < move[1].length; i++) {
         spreadMoves.push([move[0], move[1][i]])
@@ -37,12 +38,12 @@ export function mediumAI(validMoves, prevState) {
     }
     // get a new board
     const fakeState = { empty: testEmpty, captured: testCaptured }
-    const testMoves = populatePlayerMoves(1, -1, fakeState)
+    const testMoves = populatePlayerMoves(1, -1, fakeState) // I'm a little surprised I can fake a state this easily.
     return testMoves.reduce((acc, curr) => acc + curr[1].length, 0)
   })
-  console.log(minOpp);
   // minOpp is now an array of how many moves the opponent will have with any given move.
   // Let's find out what the smallest value of minOpp is.
+  // Note: Not sure if it would be possible or easier to get an array with this value assigned to each move.
   let min = 60 // 15 pieces on the board, four directions
   for (let i = 0; i < minOpp.length; i++) {
     if (minOpp[i] < min) {
@@ -60,7 +61,7 @@ export function mediumAI(validMoves, prevState) {
   const bestMoves = []
   bestIndices.forEach(idx => bestMoves.push(spreadMoves[idx]))
   // This should be an array of moves all of equal goodness by current goodness metrics
-  return bestMoves[Math.floor(Math.random() * bestMoves.length)]
+  return bestMoves[Math.floor(Math.random() * bestMoves.length)] // And then the standard random mess
 }
 
 export default {
