@@ -52,9 +52,9 @@ export default function Victory(props) {
       diff_int: props.diff,
     };
     submitLeader(victor);
-    setSubmitted(true);
     props.setGameState({empty: []})
     props.setAck(false)
+    setSubmitted(true);
     history.push("/")
   }
 

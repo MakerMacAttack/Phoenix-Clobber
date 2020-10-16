@@ -11,6 +11,7 @@ header button {
 body {
   background-image: url("background/moroccan-flower.png");
   /* credit: www.subtlepatterns.com */
+  margin-bottom: 5vh;
 }
 
 li {
@@ -24,7 +25,7 @@ span {
 }
 
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 5px;
   background: #43aa8b;
   width: 100vw;
