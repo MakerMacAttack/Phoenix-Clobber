@@ -92,6 +92,7 @@ I will be using a personal Airtable which will log the username, time of creatio
 ## Timeframes
 
 | Component | Priority | Estimated Time | Time Invested | Actual Time |
+| --- | :---: |  :---: | :---: | :---: |
 | Specification | H |  3hr | 3hr | 3hr |
 | Psuedocode | H |  3hr | 2hr | 2hr |
 | Navbar | H |  2hr | 3hr | 3hr |
