@@ -2,7 +2,7 @@
 
 ## Clobber
 
-[https://clobber.netlify.app/](Netlify Deploy)
+[Netlify Deploy](https://clobber.netlify.app/)
 
 ## Project Description
 
