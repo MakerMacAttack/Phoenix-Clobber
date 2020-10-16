@@ -13,6 +13,8 @@ function Home() {
   const [leaderboard, setLeaderboard] = useState(false);
   const [emptyEmpty, setEmptyEmpty] = useState(true);
 
+  
+
   return (
     <>
       <header>
@@ -29,7 +31,7 @@ function Home() {
           <Difficulty set={setDifficulty} />
         </Route>
         <Route path="/play">
-          <Game difficulty={difficulty} setEmptyEmpty={setEmptyEmpty} />
+          <Game difficulty={difficulty} setEmptyEmpty={setEmptyEmpty} setAck={setAck}/>
         </Route>
       </main>
       <Footer />

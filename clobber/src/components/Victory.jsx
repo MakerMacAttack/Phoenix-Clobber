@@ -7,6 +7,8 @@ export default function Victory(props) {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  const {won, empty} = props.gameState
+
   const history = useHistory()
 
   const submitLeader = async (fields) => {
@@ -24,7 +26,8 @@ export default function Victory(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const turns = (props.empty.length - 1) / 2;
+    const turns = (empty.length - 1) / 2;
+    // okay there might be a way to handle variable names better here.
     let difficulty = "";
     switch (props.diff) {
       case 0:
@@ -50,12 +53,14 @@ export default function Victory(props) {
     };
     submitLeader(victor);
     setSubmitted(true);
+    props.setGameState({empty: []})
+    props.setAck(false)
     history.push("/")
   }
 
   return (
     <>
-      {props.won ? (
+      {won ? (
         <div>
           <div style={{ display: submitted ? "none" : "box" }}>
             <h1>Congrats, you beat a computer selecting moves at random.</h1>

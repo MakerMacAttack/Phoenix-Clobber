@@ -142,9 +142,10 @@ function Game(props) {
       <div id="endgame">
         <Route path="/play/victory">
           <Victory
-            won={gameState.won}
-            empty={gameState.empty}
-            diff={gameState.difficulty}
+            setGameState={setGameState}
+            gameState={gameState}
+            diff={gameState.difficulty} // See note in Victory
+            setAck={props.setAck}
           />
         </Route>
         <Route path="/play/loss">
