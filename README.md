@@ -135,3 +135,31 @@ I can expand my repetoire and if this functions it could be a fun, simple additi
 ### Threats:
 
 I have no guarantee that I can do this, and game logic can sometimes be very difficult.
+
+## Code Snippet
+
+This is a portion of my mediumAI. I chose it for a few reasons. One is I'm simply proud I was able to implement it before deadline. The logic is slightly more complicated than the easyAI and I'm proud I was able to take a concept I believe makes for a decent challenge and successfully code out the logic.
+
+The other big reason is that this is an interesting cross-section of my code. In hindsight it's revealing to me that I should have abstracted out a lot of chunks of other functions, since there's a lot of small bits here I'm re-using from other programs. So in one sense I'm showing off several different scraps of code I'm proud of, and in another I'm indicating that what I've learned from this is to keep my functions extremely modular and abstract our anything I think I might ever need in another context.
+
+```
+  const minOpp = spreadMoves.map(move => {
+    let testEmpty = []
+    testEmpty = [...prevState.empty, move[0]]
+    let testCaptured = []
+    if (checkState(prevState.captured, move[1])) {
+      testCaptured = prevState.captured.filter((position) => {
+        return !(
+          position[0] === move[1][0] &&
+          position[1] === move[1][1]
+        );
+      });
+    } else {
+      testCaptured = [...prevState.captured, move[1]]
+    }
+    // get a new board
+    const fakeState = { empty: testEmpty, captured: testCaptured }
+    const testMoves = populatePlayerMoves(1, -1, fakeState) // I'm a little surprised I can fake a state this easily.
+    return testMoves.reduce((acc, curr) => acc + curr[1].length, 0)
+  })
+  ```
