@@ -110,7 +110,7 @@ I will be using a personal Airtable which will log the username, time of creatio
 | Advanced CSS - Board | M |  3hr | 3hr | 3hr |
 | Advanced CSS - Everything Else | L |  3hr | 3hr | 3hr |
 | Make a move | H |  3hr | 4hr | 4hr |
-| Update ReadME | 3hr | 2hr | 2hr |
+| Update ReadME | H | 3hr | 2hr | 2hr |
 | Total | H | 41hrs| 47hr | 47hr |
 
 ## SWOT Analysis
