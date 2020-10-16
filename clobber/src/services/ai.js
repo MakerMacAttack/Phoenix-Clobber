@@ -8,17 +8,22 @@ export function easyAI(validMoves) {
   }
 }
 
-export function mediumAI(validMoves) {
+export function mediumAI(validMoves, prevState) {
   const spreadMoves = []
   validMoves.forEach(move => {
     for (let i = 0; i < move[1].length; i++) {
-        spreadMoves.push(move[0], move[1][i])
+        spreadMoves.push([move[0], move[1][i]])
       }
-    })
+  })
   //simulate each move
   //get new empty and captured
   const minOpp = spreadMoves.map(move => {
-    const testEmpty = [...prevState.empty, move[0]]
+    let testEmpty = []
+    if (prevState.empty.length > 0) {
+      testEmpty = [...prevState.empty, move[0]]
+    } else {
+      testEmpty = [move[0]]
+    }
     let testCaptured = []
     if (checkState(prevState.captured, move[1])) {
       testCaptured = prevState.captured.filter((position) => {
@@ -28,13 +33,14 @@ export function mediumAI(validMoves) {
         );
       });
     } else {
-      testCaptured = [...prevState.captured, move[1]]
+      testCaptured = prevState.captured.length > 0 ? [...prevState.captured, move[1]] : [move[1]]
     }
     // get a new board
-    fakeState = { empty: testEmpty, captured: testCaptured }
-    testMoves = populatePlayerMoves(1, -1, fakeState)
-    return testMoves.reduce((acc, curr) => acc + curr[1].length)
+    const fakeState = { empty: testEmpty, captured: testCaptured }
+    const testMoves = populatePlayerMoves(1, -1, fakeState)
+    return testMoves.reduce((acc, curr) => acc + curr[1].length, 0)
   })
+  console.log(minOpp);
   // minOpp is now an array of how many moves the opponent will have with any given move.
   // Let's find out what the smallest value of minOpp is.
   let min = 60 // 15 pieces on the board, four directions
@@ -51,7 +57,7 @@ export function mediumAI(validMoves) {
     }
   })
   // Now I have the indices of all the best moves.
-  bestMoves = []
+  const bestMoves = []
   bestIndices.forEach(idx => bestMoves.push(spreadMoves[idx]))
   // This should be an array of moves all of equal goodness by current goodness metrics
   return bestMoves[Math.floor(Math.random() * bestMoves.length)]

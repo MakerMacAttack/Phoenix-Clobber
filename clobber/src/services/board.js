@@ -88,7 +88,7 @@ export function computerValidSelection(moves, gameState, setGameState) {
           move = easyAI(moves)
           break;
         case 1:
-          move = mediumAI(moves)
+          move = mediumAI(moves, gameState)
           break;
         default:
           move = easyAI(moves)
