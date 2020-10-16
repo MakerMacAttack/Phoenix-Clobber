@@ -8,6 +8,10 @@
 
 Clobber is a react app which emulates the popular boardgame Clobber. It maintains a front-end boardgame for users to interact with while displaying high scores from an API. The board is displayed using grid layout for a responsive lay-out. Users can choose from multiple levels of difficulty.
 
+## Acknowledgement
+
+This project was partially inspired by a previous group project the author worked on in a graduate course in AI. Fellow students in the project were Andrew O'Brien and Colleen Cannon.
+
 ## Wireframes
 
 Instructions - Mobile
