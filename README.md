@@ -10,7 +10,7 @@ Clobber is a react app which emulates the popular boardgame Clobber. It maintain
 
 ## Acknowledgement
 
-This project was partially inspired by a previous group project the author worked on in a graduate course in AI. Fellow students in the project were Andrew O'Brien and Colleen Cannon.
+This project was partially inspired by a previous [group project](https://github.com/MakerMacAttack/theClobbit) the author worked on in a graduate course in AI. Fellow students in the project were Andrew O'Brien and Colleen Cannon.
 
 ## Wireframes
 
